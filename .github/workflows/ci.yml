@@ -30,8 +30,8 @@ jobs:
       - name: Build and push
         run: |
           .\build.ps1 `
-            -from_image_name ${{ matrix.from-image.name }} `
-            -from_image_tag ${{ matrix.from-image.tag }} `
+            -from_image_name ${{ matrix.from-image-name }} `
+            -from_image_tag ${{ matrix.from-image-tag }} `
             -elixir_version ${{ matrix.elixir.version }} `
             -elixir_hash ${{ matrix.elixir.hash }} `
             -repo ${{ env.REGISTRY }}/${{ env.IMAGE }}
