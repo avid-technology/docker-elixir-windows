@@ -1,0 +1,37 @@
+on: push
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE: avid-technology/elixir
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+        from-image-name:
+          - "avid-technology/erlang"
+        from-image-tag:
+          - "24.0.6-windows-10.0.17763.2114"
+        elixir:
+          - version: "1.12.2"
+            hash: "38eb2281032b0cb096ef5e61f048c5374d6fb9bf4078ab8f9526a42e16e7c661732a632b55d6072328eedf87a47e6eeb3f0e3f90bba1086239c71350f90c75e5",
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        run: |
+          .\build.ps1 `
+            -from_image_name ${{ matrix.from-image.name }} `
+            -from_image_tag ${{ matrix.from-image.tag }} `
+            -elixir_version ${{ matrix.elixir.version }} `
+            -elixir_hash ${{ matrix.elixir.hash }} `
+            -repo ${{ env.REGISTRY }}/${{ env.IMAGE }}
