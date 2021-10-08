@@ -18,8 +18,7 @@ param (
 $from_image = "${from_image_repo}/${from_image_name}:${from_image_tag}"
 $build_image = "${build_image_repo}/${build_image_name}:${build_image_tag}"
 
-$windows_tag = ($from_image_name.Split("/") + $from_image_tag) -join "-"
-$elixir_tag = @($elixir_version, $windows_tag) -join "-"
+$elixir_tag = @($elixir_version, "erlang", $from_image_tag) -join "-"
 $tag = "${repo}:${elixir_tag}"
 
 docker build `
