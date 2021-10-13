@@ -26,14 +26,7 @@ ARG ELIXIR_VERSION
 
 COPY --from=build ["C:/Program Files/elixir-${ELIXIR_VERSION}", "C:/Program Files/elixir-${ELIXIR_VERSION}"]
 
-ADD https://github.com/git-for-windows/git/releases/download/v2.33.0.windows.2/Git-2.33.0.2-64-bit.exe \
-  ./Git-2.33.0.2-64-bit.exe
-
-RUN Git-2.33.0.2-64-bit.exe /VERYSILENT /NORESTART /NOCANCEL /SP- \
-  /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS \
-  /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh"
-
 # Unfortunately setx won't work on certain versions of nanoserver. This is a work around.
-ENV  PATH="C:\Windows\system32;C:\Windows;C:\Program Files\erl-${OTP_VERSION}\bin;C:\Program Files\elixir-${ELIXIR_VERSION}\bin;C:\Program Files\Git\bin;C:\Program Files\Git\cmd"
+ENV  PATH="C:\Windows\system32;C:\Windows;C:\Program Files\erl-${OTP_VERSION}\bin;C:\Program Files\elixir-${ELIXIR_VERSION}\bin"
 
 CMD [ "iex" ]
