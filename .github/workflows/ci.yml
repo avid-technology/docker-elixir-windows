@@ -13,12 +13,14 @@ jobs:
         from-image-name:
           - "avid-technology/erlang"
         from-image-tag:
-          - "24.0.6-windows-10.0.17763.2114"
+          - "24.2-windows-10.0.17763.2114"
         elixir:
+          - version: "1.13.0"
+            hash: "58ffe87d6eb89435d8605aee04556aa1a1ba25cf2fa7688d0a5da162d7d7c57b47b2f726b365a7aeb18832bf08de3db5d3ec0ed45e13da276438679f29e5e3ac"
           - version: "1.12.2"
             hash: "38eb2281032b0cb096ef5e61f048c5374d6fb9bf4078ab8f9526a42e16e7c661732a632b55d6072328eedf87a47e6eeb3f0e3f90bba1086239c71350f90c75e5"
         otp:
-          - version: "24.0.6"
+          - version: "24.2"
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
